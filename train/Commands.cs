@@ -16,7 +16,7 @@ public class Commands
     public const string PatchJade = "Нефрит за патч";
     public const string F2P = "Нет пропуска";
     public const string NotF2P = "Есть пропуск";
-    public const string promoActivation = "Ввести промокод";
-    public const string ShowPromos = "Список промокодов";
+    public const string showPromos = "Промокоды";
+    public const string calcs = "Калькуляторы";
 
 }

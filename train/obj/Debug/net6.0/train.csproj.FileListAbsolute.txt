@@ -206,3 +206,4 @@ E:\RiderProjects\train\train\obj\Debug\net6.0\refint\train.dll
 E:\RiderProjects\train\train\obj\Debug\net6.0\train.pdb
 E:\RiderProjects\train\train\obj\Debug\net6.0\train.genruntimeconfig.cache
 E:\RiderProjects\train\train\obj\Debug\net6.0\ref\train.dll
+E:\RiderProjects\train\train\obj\Debug\net6.0\train.sourcelink.json

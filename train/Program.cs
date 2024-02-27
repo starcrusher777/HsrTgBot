@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using Telegram.Bots.Http;
-using static Telegram.Bot.Types.Enums.UpdateType;
+using Telegram.Bot.Types.Enums;
 using static train.Commands;
-using CallbackQuery = Telegram.Bot.Types.CallbackQuery;
+
 
 namespace train
 {
@@ -64,8 +59,6 @@ namespace train
                 {
                     case CountJumps: await HandleReceivedNumbersAsync(message);
                         break;
-                    case MainMenu: await toMainMenu(message);
-                        break;
                     case PatchJade:
                         break;
                     case hasPass : 
@@ -114,8 +107,6 @@ namespace train
                         break;
                     case "days":
                         break;
-                    case promoActivation :
-                        break;
                 }
                 return;
             }
@@ -143,8 +134,8 @@ namespace train
                         {
                             new KeyboardButton[]
                             {
-                                new KeyboardButton(NotF2P),
-                                new KeyboardButton(F2P),
+                                new(NotF2P),
+                                new(F2P)
                             },
                         })
                     {
@@ -171,7 +162,7 @@ namespace train
             if (message.Text == hasPass) 
             {
                 _userAnswers[chatId] = 1;
-                Console.WriteLine($"Установлено значение _userAnswers[{chatId}] = {_userAnswers[chatId]}");
+                Console.WriteLine($"Установлено значение _userAnswers[{chatId}] = {_userAnswers[chatId]}"); //debug
                 await setChatInStage(chatId, hasPass);
                 await ProcessAnswer1(chatId, update);
                 await SendQuestion2(chatId, update);
@@ -181,7 +172,7 @@ namespace train
             if (message.Text == noPass)
             {
                 _userAnswers[chatId] = 1;
-                Console.WriteLine($"Установлено значение _userAnswers[{chatId}] = {_userAnswers[chatId]}");
+                
                 await setChatInStage(chatId, noPass);
                 await ProcessAnswer1(chatId, update);
                 await SendQuestion2(chatId, update);
@@ -191,7 +182,6 @@ namespace train
             if (message.Text == hasBP)
             {
                 _userAnswers[chatId] = 2;
-                Console.WriteLine($"Установлено значение _userAnswers[{chatId}] = {_userAnswers[chatId]}");
                 await setChatInStage(chatId, hasBP);
                 await ProcessAnswer2(chatId, update);
                 await SendQuestion3(chatId, update);
@@ -201,7 +191,6 @@ namespace train
             if (message.Text == noBP)
             {
                 _userAnswers[chatId] = 2;
-                Console.WriteLine($"Установлено значение _userAnswers[{chatId}] = {_userAnswers[chatId]}");
                 await setChatInStage(chatId, noBP);
                 await ProcessAnswer2(chatId, update);
                 await SendQuestion3(chatId, update);
@@ -211,7 +200,6 @@ namespace train
             if (message.Text == "I")
             {
                 _userAnswers[chatId] = 3;
-                Console.WriteLine($"Установлено значение _userAnswers[{chatId}] = {_userAnswers[chatId]}");
                 await setChatInStage(chatId, "I");
                 await ProcessAnswer3(chatId, update);
                 await SendQuestion4(chatId, update);
@@ -339,23 +327,17 @@ namespace train
             }
             
 
-            if (message.Text == promoActivation)
-            {
-                await setChatInStage(chatId, promoActivation);
-                await PromoActivation(chatId, message);
-            }
-
-            if (message.Text == "Калькуляторы")
+            if (message.Text == calcs)
             {
                 var replyKeyboard = new ReplyKeyboardMarkup(
                     new List<KeyboardButton[]>()
                     {
                         new KeyboardButton[]
                         {
-                            new KeyboardButton(CountJumps),
-                            new KeyboardButton(PatchJade),
-                            new KeyboardButton(CountJade)
-                        },
+                            new(CountJumps),
+                            new(PatchJade),
+                            new(CountJade)
+                        }
                     })
                     
                 {
@@ -365,7 +347,7 @@ namespace train
                     replyMarkup: replyKeyboard);    
             }
 
-            if (message.Text == "Промокоды")
+            if (message.Text == showPromos)
             {
                 var promo1 = "TT9S28LK4QHP";
                 var promo2 = "EA8BKR4JL93T";
@@ -381,8 +363,8 @@ namespace train
                     {
                         new KeyboardButton[]
                         {
-                            new KeyboardButton("Калькуляторы"),
-                            new KeyboardButton("Промокоды"),
+                            new(calcs),
+                            new(showPromos)
                         },
                     })
                     
@@ -406,8 +388,8 @@ namespace train
                         {
                             new KeyboardButton[]
                             {
-                                new KeyboardButton("Калькуляторы"),
-                                new KeyboardButton("Промокоды"),
+                                new(calcs),
+                                new(showPromos)
                             },
                         })
                     
@@ -442,8 +424,8 @@ namespace train
                         {
                             new KeyboardButton[]
                             {
-                                new KeyboardButton("Калькуляторы"),
-                                new KeyboardButton("Промокоды"),
+                                new(calcs),
+                                new(showPromos)
                             },
                         })
                     {
@@ -475,8 +457,8 @@ namespace train
                         {
                             new KeyboardButton[]
                             {
-                                new KeyboardButton("Калькуляторы"),
-                                new KeyboardButton("Промокоды"),
+                                new(calcs),
+                                new(showPromos)
                             },
                         })
                     {
@@ -507,8 +489,8 @@ namespace train
                         {
                             new KeyboardButton[]
                             {
-                                new KeyboardButton("Калькуляторы"),
-                                new KeyboardButton("Промокоды"),
+                                new(calcs),
+                                new(showPromos)
                             },
                         })
                     {
@@ -551,27 +533,7 @@ namespace train
         {
             stages.RemoveAll(x => x.Item1 == chatId);
         }
-
-        private static async Task toMainMenu(Message message)
-        {
-            if (message.Text == "В главное меню")
-            {
-                var replyKeyboard = new ReplyKeyboardMarkup(
-                    new List<KeyboardButton[]>()
-                    {
-                        new KeyboardButton[]
-                        {
-                            new KeyboardButton("В главное меню")
-                        }
-                    })
-                {
-                    ResizeKeyboard = true,
-                };
-                await bot.SendTextMessageAsync(message.Chat, "Что вас интересует?",
-                    replyMarkup: replyKeyboard);    
-                return;
-            }
-        }
+        
 
         private static async Task SendQuestion1(long chatId, Update update)
         {
@@ -681,150 +643,7 @@ namespace train
             await removeChatFromStage(chatId);
             await bot.SendTextMessageAsync(chatId, $"Вы ответили на четвертый вопрос: {answerText}");
         }
-
-        /*static async Task FirstJade(long chatId, Message message)
-        {
-            var daysChatId = message.Chat.Id;
-            List<string> allStrings = Answers.Values.SelectMany(list => list).ToList();
-            var firstJade = 0;
-
-            var result1 = 0;
-            foreach (var answer in allStrings)
-            {
-                
-                if (answer == "Есть пропуск снабжения")
-                {
-                    result1 = 30 * (60 + 90);
-                }
-                else if (answer == "Нет пропуска снабжения")
-                {
-                    result1 = 30 * 60;
-                }
-            }
-
-            await TotalJade(chatId, message, result1);
-        }
         
-        static async Task SecondJade(long chatId, Message message)
-        {
-            var daysChatId = message.Chat.Id;
-            List<string> allStrings = Answers.Values.SelectMany(list => list).ToList();
-            var firstJade = 0;
-
-            foreach (var answer in allStrings)
-            {
-                var result2 = 0;
-                
-                if (answer == "Есть боевой пропуск")
-                {
-                    result2 = 680;
-                }
-                else if (answer == "Нет боевого пропуска")
-                {
-                    result2 = 0;
-                }
-            }
-        }
-        
-        static async Task ThirdJade(long chatId, Message message)
-        {
-            var daysChatId = message.Chat.Id;
-            List<string> allStrings = Answers.Values.SelectMany(list => list).ToList();
-            var firstJade = 0;
-
-            var result3 = 0;
-            foreach (var answer in allStrings)
-            {
-                
-                if (answer == "I")
-                {
-                    result3 = 60;
-                }
-                else if (answer == "II")
-                {
-                    result3 = 120;
-                }
-                else if (answer == "III")
-                {
-                    result3 = 180;
-                }
-                else if (answer == "IV")
-                {
-                    result3 = 240;
-                }
-                else if (answer == "V")
-                {
-                    result3 = 300;
-                }
-                else if (answer == "VI")
-                {
-                    result3 = 360;
-                }
-                else if (answer == "VII")
-                {
-                    result3 = 420;
-                }
-                else if (answer == "VIII")
-                {
-                    result3 = 480;
-                }
-                else if (answer == "II")
-                {
-                    result3 = 540;
-                }
-                else if (answer == "X")
-                {
-                    result3 = 600;
-                }
-                else if (answer == "XI")
-                {
-                    result3 = 660;
-                }
-                else if (answer == "XII")
-                {
-                    result3 = 720;
-                }
-            }
-
-            await TotalJade(chatId, message, result3);
-        }
-        
-        static async Task FourthJade(long chatId, Message message)
-        {
-            var daysChatId = message.Chat.Id;
-            List<string> allStrings = Answers.Values.SelectMany(list => list).ToList();
-            var firstJade = 0;
-
-            var result4 = 0;
-            foreach (var answer in allStrings)
-            {
-                
-                if (answer == "1")
-                {
-                    result4 = 60;
-                }
-                else if (answer == "2")
-                {
-                    result4 = 120;
-                }
-                else if (answer == "3")
-                {
-                    result4 = 180;
-                }
-                else if (answer == "4")
-                {
-                    result4 = 240;
-                }
-            }
-
-            await TotalJade(chatId, message, result4);
-        }
-
-        static async Task TotalJade(long chatId, Message message, long result)
-        {
-            long total = 0;
-            total += result;
-        }*/
         
         static async Task TotalJadePatch(long chatId, Message message1)
         {
@@ -956,7 +775,7 @@ namespace train
                 
                 //Warps
                 
-                //Ivent
+                //Event
                 var loginWarps = 10;
                 var randomGift = 10;
                 var shopWarps = 5;
@@ -977,11 +796,7 @@ namespace train
                 totalEventWarps = bpEventWarps + loginWarps + randomGift + shopWarps;
 
                 totalStandartWarps = bpStandartWarps + shopWarps2 + simulatedWarps;
-
-
-
-
-
+                
             }
             
             var warpsCounter = (int)Math.Floor((double)(totalJade2 / 160));
@@ -993,8 +808,8 @@ namespace train
                 {
                     new KeyboardButton[]
                     {
-                        new KeyboardButton("Калькуляторы"),
-                        new KeyboardButton("Промокоды"),
+                        new(calcs),
+                        new(showPromos)
                     },
                 })
             {
@@ -1003,23 +818,6 @@ namespace train
             await bot.SendTextMessageAsync(chatId, $"Total jade~ {totalJade2} ({warpsCounter} Warps), Event Warps {totalEventWarps}, Standart Warps {totalStandartWarps}, Total Event Warps {totalEventWarps2}",
                 replyMarkup: replyKeyboard);
         }
-        
-
-        private static async Task Start(long chatId, Update update)
-        {
-            var replyMarkup = new ReplyKeyboardMarkup(new[]
-            {
-                new KeyboardButton("Начать"),
-            })
-            {
-                ResizeKeyboard = true
-            };
-            await bot.SendTextMessageAsync(chatId, "Начинаем", replyMarkup: replyMarkup);
-            await removeChatFromStage(chatId);
-        }
-
-        
-        
         
         public static void Main(string[] args) 
             { 
