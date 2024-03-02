@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\RiderProjects\\train\\train\\train.csproj": {}
+    "C:\\Users\\Ян\\RiderProjects\\HsrTgBot\\train\\train.csproj": {}
   },
   "projects": {
-    "E:\\RiderProjects\\train\\train\\train.csproj": {
+    "C:\\Users\\Ян\\RiderProjects\\HsrTgBot\\train\\train.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\RiderProjects\\train\\train\\train.csproj",
+        "projectUniqueName": "C:\\Users\\Ян\\RiderProjects\\HsrTgBot\\train\\train.csproj",
         "projectName": "train",
-        "projectPath": "E:\\RiderProjects\\train\\train\\train.csproj",
+        "projectPath": "C:\\Users\\Ян\\RiderProjects\\HsrTgBot\\train\\train.csproj",
         "packagesPath": "C:\\.nuget",
-        "outputPath": "E:\\RiderProjects\\train\\train\\obj\\",
+        "outputPath": "C:\\Users\\Ян\\RiderProjects\\HsrTgBot\\train\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ян\\AppData\\Roaming\\NuGet\\NuGet.Config",

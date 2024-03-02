@@ -139,7 +139,7 @@ namespace train
                             },
                         })
                     {
-                        ResizeKeyboard = true,
+                        ResizeKeyboard = true
                     };
                     await botClient.SendTextMessageAsync(message.Chat, "Есть ли у вас пропуск?",
                 
@@ -341,7 +341,7 @@ namespace train
                     })
                     
                 {
-                    ResizeKeyboard = true,
+                    ResizeKeyboard = true
                 };
                 await botClient.SendTextMessageAsync(message.Chat, "Что вас интересует?",
                     replyMarkup: replyKeyboard);    
@@ -349,13 +349,23 @@ namespace train
 
             if (message.Text == showPromos)
             {
-                var promo1 = "TT9S28LK4QHP";
-                var promo2 = "EA8BKR4JL93T";
-                var promo3 = "LTQA2Q5249KF";
-
+                var promo1 = "SB87P52BTVQ3";
+                var desc1 = "\u00d750 звездного нефрита, \u00d710 000 кредитов";
+                
+                var promo2 = "6B976L2STURF";
+                var desc2 = "\u00d750 звездного нефрита, \u00d710 000 кредитов";
+                
+                var promo3 = "SWEETDREAMS";
+                var desc3 = "\u00d72 очищенный эфир, \u00d72 путеводитель путешественника";
+                
+                
                 await botClient.SendTextMessageAsync(message.Chat, "hsr.hoyoverse.com/gift");
+                
                 await botClient.SendTextMessageAsync(message.Chat, $"{promo1}");
+                await botClient.SendTextMessageAsync(message.Chat, $"{desc1}");
+                
                 await botClient.SendTextMessageAsync(message.Chat, $"{promo2}");
+                await botClient.SendTextMessageAsync(message.Chat, $"{desc2}");
                 
                 
                 var replyKeyboard = new ReplyKeyboardMarkup(
@@ -372,7 +382,9 @@ namespace train
                     ResizeKeyboard = true,
                 };
                 await botClient.SendTextMessageAsync(message.Chat, $"{promo3}",
-                    replyMarkup: replyKeyboard);    
+                    replyMarkup: replyKeyboard);
+                await botClient.SendTextMessageAsync(message.Chat, $"{desc3}");
+                
             }
 
 
@@ -383,6 +395,8 @@ namespace train
                 
                 if (message.Text.ToLower() == "/start")
                 {
+                    var welcomeMessage = "Привет первопроходец, с помощью этого бота ты сможешь узнать актуальные промокоды, посчитать колличество прыжков и звездного нефрита.";
+                    await botClient.SendTextMessageAsync(message.Chat, $"{welcomeMessage}");
                     var replyKeyboard = new ReplyKeyboardMarkup(
                         new List<KeyboardButton[]>()
                         {
@@ -390,7 +404,7 @@ namespace train
                             {
                                 new(calcs),
                                 new(showPromos)
-                            },
+                            }
                         })
                     
                     {
@@ -426,7 +440,7 @@ namespace train
                             {
                                 new(calcs),
                                 new(showPromos)
-                            },
+                            }
                         })
                     {
                         ResizeKeyboard = true
@@ -459,7 +473,7 @@ namespace train
                             {
                                 new(calcs),
                                 new(showPromos)
-                            },
+                            }
                         })
                     {
                         ResizeKeyboard = true
@@ -491,7 +505,7 @@ namespace train
                             {
                                 new(calcs),
                                 new(showPromos)
-                            },
+                            }
                         })
                     {
                         ResizeKeyboard = true
@@ -541,7 +555,7 @@ namespace train
             var replyMarkup = new ReplyKeyboardMarkup(new[]
             {
                 new KeyboardButton("Есть пропуск снабжения"),
-                new KeyboardButton("Нет пропуска снабжения"),
+                new KeyboardButton("Нет пропуска снабжения")
             })
             {
                 ResizeKeyboard = true
@@ -555,7 +569,7 @@ namespace train
             var replyMarkup = new ReplyKeyboardMarkup(new[]
             {
                 new KeyboardButton("Есть боевой пропуск"),
-                new KeyboardButton("Нет боевого пропуска"),
+                new KeyboardButton("Нет боевого пропуска")
             })
             {
                 ResizeKeyboard = true
@@ -598,7 +612,7 @@ namespace train
                 new KeyboardButton("1"),
                 new KeyboardButton("2"),
                 new KeyboardButton("3"),
-                new KeyboardButton("4"),
+                new KeyboardButton("4")
             })
             {
                 ResizeKeyboard = true
@@ -801,7 +815,6 @@ namespace train
             
             var warpsCounter = (int)Math.Floor((double)(totalJade2 / 160));
             var totalEventWarps2 = totalEventWarps  + warpsCounter;
-            //await bot.SendTextMessageAsync(daysChatId, );
 
             var replyKeyboard = new ReplyKeyboardMarkup(
                 new List<KeyboardButton[]>()

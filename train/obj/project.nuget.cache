@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FwBVO4Tq1m/8k84VPp80HtscVVxOBR0st8k4O+Kdh5cdZG4Nv9NvuH2B0kGvHhHhmbfX+pWX9wc3H0SbmGds0g==",
+  "dgSpecHash": "BqMzjVnKX/F/4dxfw+CpQasyfSWvOpTksoxrAZq56u0w0TCb9IQGTqLxKh5AVsayYA3AYqnCKzN+aSH1fwXzQw==",
   "success": true,
-  "projectFilePath": "E:\\RiderProjects\\train\\train\\train.csproj",
+  "projectFilePath": "C:\\Users\\Ян\\RiderProjects\\HsrTgBot\\train\\train.csproj",
   "expectedPackageFiles": [
     "C:\\.nuget\\microsoft.extensions.configuration\\6.0.0\\microsoft.extensions.configuration.6.0.0.nupkg.sha512",
     "C:\\.nuget\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
